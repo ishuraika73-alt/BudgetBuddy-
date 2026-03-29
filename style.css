@@ -1,71 +1,36 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  background: linear-gradient(135deg, #f9f9f9, #e0eafc);
   color: #2c3e50;
 }
-.screen { display: none; padding: 20px; height: calc(100vh - 60px); overflow-y: auto; }
+.screen { display: none; padding: 20px; min-height: 100vh; }
 .screen.active { display: block; }
 .fade { animation: fadeIn 0.5s ease; }
 @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-.logo { font-size: 2em; margin: 40px 0; text-align: center; }
-button.primary {
-  width: 80%;
-  padding: 12px;
-  margin: 10px auto;
-  border: none;
-  border-radius: 30px;
-  background: #3498db;
-  color: white;
-  font-size: 1em;
-  display: block;
+.logo { text-align:center; margin:30px 0; }
+input {
+  width: 90%; padding: 12px; margin: 10px auto; display:block;
+  border-radius: 10px; border: 1px solid #ccc;
 }
-button.primary:hover { background: #2980b9; }
-input, select {
-  width: 90%;
-  padding: 10px;
-  margin: 10px auto;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  display: block;
+button.primary {
+  width: 90%; padding: 12px; margin: 10px auto; display:block;
+  border:none; border-radius: 10px; background:#3498db; color:white; font-size:1em;
+}
+button.secondary {
+  width: 90%; padding: 10px; margin: 10px auto; display:block;
+  border:none; border-radius: 10px; background:#95a5a6; color:white;
 }
 .card {
-  margin: 15px auto;
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background:white; border-radius:15px; padding:20px; margin:15px 0;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
-.navbar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background: #ecf0f1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
- box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-}
-.navbar div { font-size: 1.5em; cursor: pointer; }
-.fab {
-  background: #3498db;
-  color: white;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2em;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  margin-top: -30px;
-}
-.quote { font-style: italic; margin: 20px; }
-.quick-scroll {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-}
-.quick-scroll .card { min-width: 150px; flex: 0 0 auto; }
+.balance-card { position:relative; }
+.balance-card .edit { position:absolute; top:10px; right:10px; background:none; border:none; font-size:1.2em; cursor:pointer; }
+.grid { display:flex; gap:10px; }
+.grid .card { flex:1; text-align:center; cursor:pointer; }
+ul { list-style:none; padding:0; }
+ul li { background:white; margin:10px 0; padding:10px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+.star { background:none; border:none; font-size:1.5em; cursor:pointer; }
+.progress { background:#eee; border-radius:10px; height:10px; margin-top:5px; }
+.progress div { background:#3498db; height:10px; border-radius:10px; width:0; transition:width 0.3s; }
