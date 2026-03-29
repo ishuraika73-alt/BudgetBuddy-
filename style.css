@@ -1,54 +1,71 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
   margin: 0;
-  padding: 0;
-  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  color: #2c3e50;
 }
-header {
-  background: #2c3e50;
-  color: white;
-  padding: 10px;
-}
-nav button {
-  margin: 5px;
-  padding: 8px 12px;
+.screen { display: none; padding: 20px; height: calc(100vh - 60px); overflow-y: auto; }
+.screen.active { display: block; }
+.fade { animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+.logo { font-size: 2em; margin: 40px 0; text-align: center; }
+button.primary {
+  width: 80%;
+  padding: 12px;
+  margin: 10px auto;
   border: none;
-  border-radius: 6px;
+  border-radius: 30px;
   background: #3498db;
   color: white;
-  cursor: pointer;
-}
-nav button:hover { background: #2980b9; }
-.screen { padding: 20px; }
-.hidden { display: none; }
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 15px auto;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-input, select, button {
+  font-size: 1em;
   display: block;
-  margin: 10px auto;
-  padding: 10px;
+}
+button.primary:hover { background: #2980b9; }
+input, select {
   width: 90%;
-  border-radius: 6px;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
   border: 1px solid #ccc;
+  display: block;
 }
-button.back {
-  background: #95a5a6;
-  color: white;
+.card {
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
-.grid {
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: #ecf0f1;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+ box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+.navbar div { font-size: 1.5em; cursor: pointer; }
+.fab {
+  background: #3498db;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  margin-top: -30px;
 }
-.grid .card {
-  width: 150px;
-  margin: 10px;
+.quote { font-style: italic; margin: 20px; }
+.quick-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
 }
+.quick-scroll .card { min-width: 150px; flex: 0 0 auto; }

@@ -6,96 +6,97 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Authentication Screen -->
-  <div id="auth-screen" class="screen">
-    <h1>Budget Buddy</h1>
-    <div class="card">
-      <h2>Login</h2>
-      <input type="text" id="login-name" placeholder="Name">
-      <input type="email" id="login-email" placeholder="Email">
-      <input type="password" id="login-password" placeholder="Password">
-      <button onclick="login()">Login</button>
-    </div>
-    <div class="card">
-      <h2>Signup</h2>
-      <input type="text" id="signup-name" placeholder="Name">
-      <input type="email" id="signup-email" placeholder="Email">
-      <input type="password" id="signup-password" placeholder="Password">
-      <button onclick="signup()">Signup</button>
-    </div>
+  <!-- FIRST SCREEN -->
+  <div id="auth-screen" class="screen active fade">
+    <div class="logo">💰 Budget Buddy</div>
+    <button class="primary" onclick="showScreen('signup-screen')">Sign Up</button>
+    <p>Already have an account? <span onclick="showScreen('login-screen')">Login</span></p>
   </div>
- <!-- Home Screen -->
-  <div id="home-screen" class="screen hidden">
+
+  <!-- SIGNUP -->
+  <div id="signup-screen" class="screen fade">
+    <h2>Sign Up</h2>
+    <input type="text" id="signup-name" placeholder="Name">
+    <input type="email" id="signup-email" placeholder="Email">
+    <input type="password" id="signup-password" placeholder="Password">
+    <button class="primary" onclick="signup()">Create Account</button>
+  </div>
+<!-- LOGIN -->
+  <div id="login-screen" class="screen fade">
+    <h2>Login</h2>
+    <input type="text" id="login-name" placeholder="Name">
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-password" placeholder="Password">
+    <button class="primary" onclick="login()">Login</button>
+  </div>
+
+  <!-- HOME -->
+  <div id="home-screen" class="screen fade">
     <header>
       <h1>Budget Buddy</h1>
-      <nav>
-        <button onclick="showScreen('add-screen')">➕ Add Transaction</button>
-        <button onclick="showScreen('folders-screen')">📂 Transactions Folder</button>
-        <button onclick="showScreen('reports-screen')">📊 Reports</button>
-        <button onclick="showScreen('reminder-screen')">⏰ Reminder</button>
-        <button onclick="showScreen('settings-screen')">⚙️ Settings</button>
-      </nav>
+      <p id="username"></p>
     </header>
+    <div class="quote" id="quote"></div>
     <div class="card">
       <h2>Total Balance: ₹<span id="balance">0</span></h2>
       <p>Recent Transactions:</p>
       <ul id="recent-transactions"></ul>
     </div>
+    <div class="quick-scroll" id="quick-actions"></div>
+  </div>
+<!-- TRANSACTIONS -->
+  <div id="transactions-screen" class="screen fade">
+    <h2>Transactions</h2>
+    <select id="filter" onchange="filterTransactions()">
+      <option value="all">All</option>
+      <option value="day">Day</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+      <option value="year">Year</option>
+    </select>
+    <ul id="transactions-list"></ul>
   </div>
 
-<!-- Add Transaction -->
-  <div id="add-screen" class="screen hidden">
-    <header><h2>Add Transaction</h2></header>
-    <div class="card">
-      <input type="text" id="t-title" placeholder="Transaction Title">
-      <input type="number" id="t-amount" placeholder="Amount">
-      <select id="t-type">
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select>
-      <input type="text" id="t-category" placeholder="Category">
-      <input type="date" id="t-date">
-      <input type="text" id="t-folder" placeholder="Folder (new or existing)">
-      <button onclick="addTransaction()">Save</button>
+  <!-- ADD TRANSACTION -->
+  <div id="add-screen" class="screen fade">
+    <h2>Add Transaction</h2>
+    <input type="text" id="t-title" placeholder="Title">
+    <input type="number" id="t-amount" placeholder="Amount">
+    <div class="toggle">
+      <label><input type="radio" name="type" value="income" checked> Income</label>
+      <label><input type="radio" name="type" value="expense"> Expense</label>
     </div>
-    <button class="back" onclick="showScreen('home-screen')">⬅ Back</button>
+ <input type="text" id="t-category" placeholder="Category">
+    <select id="t-person"></select>
+    <label><input type="checkbox" id="t-important"> Mark Important</label>
+    <input type="date" id="t-date">
+    <button class="primary" onclick="addTransaction()">Save</button>
   </div>
 
- <!-- Folders -->
-  <div id="folders-screen" class="screen hidden">
-    <header><h2>Transactions Folders</h2></header>
-    <div id="folders-grid" class="grid"></div>
-    <button class="back" onclick="showScreen('home-screen')">⬅ Back</button>
+  <!-- ACCOUNTS -->
+  <div id="accounts-screen" class="screen fade">
+    <h2>Accounts</h2>
+    <input type="text" id="person-name" placeholder="Add Person">
+    <button onclick="addPerson()">Add</button>
+    <ul id="persons-list"></ul>
+    <h3>Set Total Balance</h3>
+    <input type="number" id="set-balance">
+    <button onclick="saveBalance()">Save Balance</button>
   </div>
 
-  <!-- Reports -->
-  <div id="reports-screen" class="screen hidden">
-    <header><h2>Reports</h2></header>
-    <div class="card" id="report-cards"></div>
-    <canvas id="report-chart"></canvas>
-    <button class="back" onclick="showScreen('home-screen')">⬅ Back</button>
+  <!-- SETTINGS -->
+  <div id="settings-screen" class="screen fade">
+    <h2>Settings</h2>
+    <p>Coming soon...</p>
   </div>
-
- <!-- Reminder -->
-  <div id="reminder-screen" class="screen hidden">
-    <header><h2>Set Reminder</h2></header>
-    <div class="card">
-      <input type="text" id="r-title" placeholder="Reminder Title">
-      <input type="number" id="r-limit" placeholder="Amount Limit">
-      <input type="date" id="r-date">
-      <button onclick="setReminder()">Set Reminder</button>
-    </div>
-    <button class="back" onclick="showScreen('home-screen')">⬅ Back</button>
-  </div>
-
-  <!-- Settings -->
-  <div id="settings-screen" class="screen hidden">
-    <header><h2>Settings</h2></header>
-    <div class="card">
-      <p>Coming soon...</p>
-    </div>
-    <button class="back" onclick="showScreen('home-screen')">⬅ Back</button>
-  </div>
+<!-- BOTTOM NAVBAR -->
+  <nav class="navbar">
+    <div onclick="showScreen('home-screen')">🏠</div>
+    <div onclick="showScreen('transactions-screen')">📂</div>
+    <div class="fab" onclick="showScreen('add-screen')">➕</div>
+    <div onclick="showScreen('accounts-screen')">👥</div>
+    <div onclick="showScreen('settings-screen')">⚙️</div>
+  </nav>
 
   <script src="script.js"></script>
 </body>
