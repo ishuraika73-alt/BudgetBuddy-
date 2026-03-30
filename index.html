@@ -32,59 +32,35 @@
 
   <!-- HOME -->
   <div id="home-screen" class="screen fade">
-    <div class="grid">
-      <div class="card nav-card" onclick="showScreen('transactions-screen')">📂 Transactions</div>
-      <div class="card nav-card" onclick="showScreen('balance-screen')">💵 Add Balance</div>
-      <div class="card nav-card" onclick="showScreen('tracker-screen')">📊 Expense Tracker</div>
-    </div>
-  </div>
+  <!-- Balance Section -->
+  <section id="balance-section" class="page">
+    <h2>Balance</h2>
+    <h3>Current Balance: ₹<span id="balance">0</span></h3>
+    <input type="number" id="set-balance" placeholder="Enter balance">
+    <button onclick="saveBalance()">Save Balance</button>
+    <h3>Folders</h3>
+    <input type="text" id="note-folder" placeholder="Folder name">
+    <button onclick="addFolder()">Add Folder</button>
+    <div id="folders"></div>
+  </section>
 
-<!-- TRANSACTIONS -->
-  <div id="transactions-screen" class="screen fade">
+  <!-- Transactions Section -->
+  <section id="transactions-section" class="page">
     <h2>Transactions</h2>
     <form onsubmit="addTransaction(event)">
       <input type="text" id="t-title" placeholder="Title" required>
       <input type="number" id="t-amount" placeholder="Amount" required>
-      <button class="primary" type="submit">Add</button>
+      <button type="submit">Add</button>
     </form>
     <ul id="transactions-list"></ul>
-    <button class="secondary" onclick="showScreen('home-screen')">⬅ Back</button>
-  </div>
-
-  <!-- BALANCE -->
-  <div id="balance-screen" class="screen fade">
-    <h2>Add Balance</h2>
-    <input type="number" id="set-balance" placeholder="Enter balance">
-    <button class="primary" onclick="saveBalance()">Save Balance</button>
-    <h3>Current Balance: ₹<span id="balance">0</span></h3>
-    <h3>Notes</h3>
-    <input type="text" id="note-folder" placeholder="Folder name">
-    <button onclick="addFolder()">Add Folder</button>
-    <div id="folders"></div>
-    <button class="secondary" onclick="showScreen('home-screen')">⬅ Back</button>
-  </div>
-
-<!-- EXPENSE TRACKER -->
-  <div id="tracker-screen" class="screen fade">
+  </section>
+<!-- Expense Tracker Section -->
+  <section id="tracker-section" class="page">
     <h2>Expense Tracker</h2>
-    <div class="card">
-      <label>Daily Goal <input type="number" id="goal-daily"></label>
-      <div class="progress"><div id="bar-daily"></div></div>
-    </div>
-    <div class="card">
-      <label>Weekly Goal <input type="number" id="goal-weekly"></label>
-      <div class="progress"><div id="bar-weekly"></div></div>
-    </div>
-    <div class="card">
-      <label>Monthly Goal <input type="number" id="goal-monthly"></label>
-      <div class="progress"><div id="bar-monthly"></div></div>
-    </div>
-    <div class="card">
-      <label>Yearly Goal <input type="number" id="goal-yearly"></label>
-      <div class="progress"><div id="bar-yearly"></div></div>
-    </div>
-    <button class="secondary" onclick="showScreen('home-screen')">⬅ Back</button>
-  </div>
+    <!-- goals + progress bars -->
+  </section>
+</div>
+
 
   <script src="script.js"></script>
 </body>

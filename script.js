@@ -90,23 +90,46 @@ function loadTransactions(){
 function addFolder(){
   let folder=document.getElementById("note-folder").value;
   if(!folder){alert("Enter folder name");return;}
-  let folders=JSON.parse(localStorage.getItem("folders"))||[];
-  if(!folders.includes(folder)) folders.push(folder);
+  let folders=JSON.parse(localStorage.getItem("folders"))||{};
+  if(!folders[folder]) folders[folder]=[];
   localStorage.setItem("folders",JSON.stringify(folders));
   loadFolders();
 }
 
 function loadFolders(){
-  let folders=JSON.parse(localStorage.getItem("folders"))||[];
+  let folders=JSON.parse(localStorage.getItem("folders"))||{};
   let div=document.getElementById("folders");
   div.innerHTML="";
-  folders.forEach(f=>{
+  Object.keys(folders).forEach(f=>{
     let card=document.createElement("div");
     card.className="card";
-    card.textContent=f;
+    card.innerHTML=`<h4>${f}</h4>
+      <input type="text" placeholder="Add item" id="item-${f}">
+      <button onclick="addItem('${f}')">Add Item</button>
+      <ul id="list-${f}"></ul>`;
     div.appendChild(card);
+// render items
+    let ul=document.getElementById(`list-${f}`);
+    folders[f].forEach(item=>{
+      let li=document.createElement("li");
+      li.textContent=item;
+      ul.appendChild(li);
+    });
   });
 }
+
+function addItem(folder){
+  let folders=JSON.parse(localStorage.getItem("folders"))||{};
+  let input=document.getElementById(`item-${folder}`);
+  let item=input.value;
+  if(item){
+    folders[folder].push(item);
+    localStorage.setItem("folders",JSON.stringify(folders));
+    loadFolders();
+  }
+}
+
+
 // ===== EXPENSE TRACKER =====
 function updateTracker(){
   let transactions=JSON.parse(localStorage.getItem("transactions"))||[];

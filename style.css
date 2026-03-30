@@ -32,3 +32,9 @@ ul { list-style:none; padding:0; }
 ul li { background:white; margin:10px 0; padding:10px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
 .progress { background:#eee; border-radius:10px; height:10px; margin-top:5px; }
 .progress div { background:#3498db; height:10px; border-radius:10px; width:0; transition:width 0.3s; }
+.page {
+  height: 100vh;
+  display: none;
+  padding: 20px;
+}
+.page.active { display: block; }
