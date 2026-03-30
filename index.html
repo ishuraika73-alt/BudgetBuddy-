@@ -9,71 +9,61 @@
   <!-- LOGIN -->
   <div id="login-screen" class="screen active fade">
     <h1 class="logo">💰 Budget Buddy</h1>
-    <input type="email" id="login-email" placeholder="Email">
-    <input type="password" id="login-password" placeholder="Password">
-    <button class="primary" onclick="login()">Login</button>
-    <button class="secondary" onclick="showScreen('signup-screen')">Create account</button>
+    <form onsubmit="login(event)">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button class="primary" type="submit">Login</button>
+    </form>
+    <button class="secondary" onclick="showScreen('signup-screen')">Signup</button>
   </div>
 
-  <!-- SIGNUP -->
+<!-- SIGNUP -->
   <div id="signup-screen" class="screen fade">
     <h1 class="logo">Create Account</h1>
-    <input type="text" id="signup-name" placeholder="Name">
-    <input type="email" id="signup-email" placeholder="Email">
-    <input type="password" id="signup-password" placeholder="Password">
-    <button class="primary" onclick="signup()">Sign Up</button>
+    <form onsubmit="signup(event)">
+      <input type="text" id="signup-name" placeholder="Name" required>
+      <input type="email" id="signup-email" placeholder="Email" required>
+      <input type="password" id="signup-password" placeholder="Password" required>
+      <button class="primary" type="submit">Sign Up</button>
+    </form>
     <button class="secondary" onclick="showScreen('login-screen')">Back to Login</button>
   </div>
 
-<!-- HOME -->
+  <!-- HOME -->
   <div id="home-screen" class="screen fade">
-    <div class="card balance-card">
-      <h2>Total Balance: ₹<span id="balance">0</span></h2>
-      <button class="edit" onclick="showScreen('balance-screen')">✏️</button>
-    </div>
     <div class="grid">
       <div class="card nav-card" onclick="showScreen('transactions-screen')">📂 Transactions</div>
+      <div class="card nav-card" onclick="showScreen('balance-screen')">💵 Add Balance</div>
       <div class="card nav-card" onclick="showScreen('tracker-screen')">📊 Expense Tracker</div>
     </div>
-    <h3>Recent Transactions</h3>
-    <ul id="recent-transactions"></ul>
   </div>
 
-  <!-- TRANSACTIONS -->
+<!-- TRANSACTIONS -->
   <div id="transactions-screen" class="screen fade">
-    <h2>Transactions <button class="star" onclick="showImportant()">⭐</button></h2>
-    <button class="primary" onclick="showScreen('add-screen')">Add Transaction</button>
+    <h2>Transactions</h2>
+    <form onsubmit="addTransaction(event)">
+      <input type="text" id="t-title" placeholder="Title" required>
+      <input type="number" id="t-amount" placeholder="Amount" required>
+      <button class="primary" type="submit">Add</button>
+    </form>
     <ul id="transactions-list"></ul>
     <button class="secondary" onclick="showScreen('home-screen')">⬅ Back</button>
   </div>
-<!-- ADD TRANSACTION -->
-  <div id="add-screen" class="screen fade">
-    <h2>Add Transaction</h2>
-    <input type="text" id="t-title" placeholder="Title">
-    <input type="number" id="t-amount" placeholder="Amount">
-    <select id="t-type"><option value="income">Income</option><option value="expense">Expense</option></select>
-    <input type="text" id="t-category" placeholder="Category">
-    <label><input type="checkbox" id="t-important"> Mark Important</label>
-    <button class="primary" onclick="addTransaction()">Save</button>
-    <button class="secondary" onclick="showScreen('transactions-screen')">⬅ Back</button>
-  </div>
 
-  <!-- IMPORTANT -->
-  <div id="important-screen" class="screen fade">
-    <h2>Important Transactions</h2>
-    <ul id="important-list"></ul>
-    <button class="secondary" onclick="showScreen('transactions-screen')">⬅ Back</button>
-  </div>
-
-<!-- BALANCE -->
+  <!-- BALANCE -->
   <div id="balance-screen" class="screen fade">
-    <h2>Edit Balance</h2>
-    <input type="number" id="set-balance">
-    <button class="primary" onclick="saveBalance()">Save</button>
+    <h2>Add Balance</h2>
+    <input type="number" id="set-balance" placeholder="Enter balance">
+    <button class="primary" onclick="saveBalance()">Save Balance</button>
+    <h3>Current Balance: ₹<span id="balance">0</span></h3>
+    <h3>Notes</h3>
+    <input type="text" id="note-folder" placeholder="Folder name">
+    <button onclick="addFolder()">Add Folder</button>
+    <div id="folders"></div>
     <button class="secondary" onclick="showScreen('home-screen')">⬅ Back</button>
   </div>
 
-  <!-- EXPENSE TRACKER -->
+<!-- EXPENSE TRACKER -->
   <div id="tracker-screen" class="screen fade">
     <h2>Expense Tracker</h2>
     <div class="card">
@@ -88,7 +78,7 @@
       <label>Monthly Goal <input type="number" id="goal-monthly"></label>
       <div class="progress"><div id="bar-monthly"></div></div>
     </div>
- <div class="card">
+    <div class="card">
       <label>Yearly Goal <input type="number" id="goal-yearly"></label>
       <div class="progress"><div id="bar-yearly"></div></div>
     </div>
