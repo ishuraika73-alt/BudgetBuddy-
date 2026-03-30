@@ -6,28 +6,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- LOGIN -->
-  <div id="login-screen" class="screen active fade">
-    <h1 class="logo">💰 Budget Buddy</h1>
-    <form onsubmit="login(event)">
-      <input type="email" id="login-email" placeholder="Email" required>
-      <input type="password" id="login-password" placeholder="Password" required>
-      <button class="primary" type="submit">Login</button>
-    </form>
-    <button class="secondary" onclick="showScreen('signup-screen')">Signup</button>
-  </div>
+ <!-- LOGIN -->
+<div id="login-screen" class="screen active fade">
+  <h1 class="logo">💰 Budget Buddy</h1>
+  <form id="login-form">
+    <input type="email" id="login-email" placeholder="Email" required>
+    <input type="password" id="login-password" placeholder="Password" required>
+    <button class="primary" type="submit">Login</button>
+  </form>
+  <button class="secondary" onclick="showScreen('signup-screen')">Signup</button>
+</div>
 
 <!-- SIGNUP -->
-  <div id="signup-screen" class="screen fade">
-    <h1 class="logo">Create Account</h1>
-    <form onsubmit="signup(event)">
-      <input type="text" id="signup-name" placeholder="Name" required>
-      <input type="email" id="signup-email" placeholder="Email" required>
-      <input type="password" id="signup-password" placeholder="Password" required>
-      <button class="primary" type="submit">Sign Up</button>
-    </form>
-    <button class="secondary" onclick="showScreen('login-screen')">Back to Login</button>
-  </div>
+<div id="signup-screen" class="screen fade">
+  <h1 class="logo">Create Account</h1>
+  <form id="signup-form">
+    <input type="text" id="signup-name" placeholder="Name" required>
+    <input type="email" id="signup-email" placeholder="Email" required>
+    <input type="password" id="signup-password" placeholder="Password" required>
+    <button class="primary" type="submit">Sign Up</button>
+  </form>
+  <button class="secondary" onclick="showScreen('login-screen')">Back to Login</button>
+</div>
+
 
   <!-- HOME -->
   <div id="home-screen" class="screen fade">
