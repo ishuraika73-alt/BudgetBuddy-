@@ -1,40 +1,44 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #f9f9f9, #e0eafc);
-  color: #2c3e50;
+  display: flex;
+  justify-content: center;
 }
-.screen { display: none; padding: 20px; min-height: 100vh; }
-.screen.active { display: block; }
+.screen {
+  max-width: 420px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
 .fade { animation: fadeIn 0.5s ease; }
 @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-.logo { text-align:center; margin:30px 0; }
+.logo { text-align:center; margin:30px 0; font-size:1.8em; }
 input {
-  width: 90%; padding: 12px; margin: 10px auto; display:block;
+  width: 100%; padding: 12px; margin: 10px 0;
   border-radius: 10px; border: 1px solid #ccc;
 }
-button.primary {
-  width: 90%; padding: 12px; margin: 10px auto; display:block;
-  border:none; border-radius: 10px; background:#3498db; color:white; font-size:1em;
+.card-btn {
+  background:white; border-radius:20px; padding:15px; margin:10px 0;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; cursor:pointer;
+  transition:0.3s;
 }
-button.secondary {
-  width: 90%; padding: 10px; margin: 10px auto; display:block;
-  border:none; border-radius: 10px; background:#95a5a6; color:white;
+.card-btn:hover { transform:scale(1.05); }
+.small-btn {
+  text-align:center; margin-top:10px; color:#3498db; cursor:pointer;
+}
+.grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
 }
 .card {
-  background:white; border-radius:15px; padding:20px; margin:15px 0;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  background:white; border-radius:20px; padding:20px; text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer; transition:0.3s;
 }
-.grid { display:flex; gap:10px; }
-.grid .card { flex:1; text-align:center; cursor:pointer; transition:0.3s; }
-.grid .card:hover { transform:scale(1.05); }
+.card:hover { transform:scale(1.05); }
+.nav-card p { margin:5px 0 0; }
+.nav-card.full { grid-column:span 2; }
 ul { list-style:none; padding:0; }
 ul li { background:white; margin:10px 0; padding:10px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
 .progress { background:#eee; border-radius:10px; height:10px; margin-top:5px; }
 .progress div { background:#3498db; height:10px; border-radius:10px; width:0; transition:width 0.3s; }
-.page {
-  height: 100vh;
-  display: none;
-  padding: 20px;
-}
-.page.active { display: block; }

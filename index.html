@@ -6,61 +6,90 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
- <!-- LOGIN -->
-<div id="login-screen" class="screen active fade">
-  <h1 class="logo">💰 Budget Buddy</h1>
-  <form id="login-form">
-    <input type="email" id="login-email" placeholder="Email" required>
-    <input type="password" id="login-password" placeholder="Password" required>
-    <button class="primary" type="submit">Login</button>
-  </form>
-  <button class="secondary" onclick="showScreen('signup-screen')">Signup</button>
-</div>
+  <!-- LOGIN -->
+  <div id="login-screen" class="screen active fade">
+    <h1 class="logo">Budget Buddy</h1>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <div class="card-btn" id="login-btn">Login</div>
+    </form>
+    <div class="small-btn" onclick="showScreen('signup-screen')">Signup</div>
+  </div>
 
-<!-- SIGNUP -->
-<div id="signup-screen" class="screen fade">
-  <h1 class="logo">Create Account</h1>
-  <form id="signup-form">
-    <input type="text" id="signup-name" placeholder="Name" required>
-    <input type="email" id="signup-email" placeholder="Email" required>
-    <input type="password" id="signup-password" placeholder="Password" required>
-    <button class="primary" type="submit">Sign Up</button>
-  </form>
-  <button class="secondary" onclick="showScreen('login-screen')">Back to Login</button>
-</div>
-
+  <!-- SIGNUP -->
+  <div id="signup-screen" class="screen fade">
+    <h1 class="logo">Create Account</h1>
+    <form id="signup-form">
+      <input type="text" id="signup-name" placeholder="Name" required>
+      <input type="email" id="signup-email" placeholder="Email" required>
+      <input type="password" id="signup-password" placeholder="Password" required>
+      <div class="card-btn" id="signup-btn">Sign Up</div>
+</form>
+    <div class="small-btn" onclick="showScreen('login-screen')">Back to Login</div>
+  </div>
 
   <!-- HOME -->
   <div id="home-screen" class="screen fade">
-  <!-- Balance Section -->
-  <section id="balance-section" class="page">
-    <h2>Balance</h2>
-    <h3>Current Balance: ₹<span id="balance">0</span></h3>
-    <input type="number" id="set-balance" placeholder="Enter balance">
-    <button onclick="saveBalance()">Save Balance</button>
-    <h3>Folders</h3>
-    <input type="text" id="note-folder" placeholder="Folder name">
-    <button onclick="addFolder()">Add Folder</button>
-    <div id="folders"></div>
-  </section>
+    <div class="grid">
+      <div class="card nav-card" onclick="showScreen('transactions-screen')">
+        📂<p>Transactions</p>
+      </div>
+      <div class="card nav-card" onclick="showScreen('balance-screen')">
+        💵<p>Add Balance</p>
+      </div>
+      <div class="card nav-card full" onclick="showScreen('tracker-screen')">
+        📊<p>Expense Tracker</p>
+      </div>
+    </div>
+  </div>
 
-  <!-- Transactions Section -->
-  <section id="transactions-section" class="page">
+  <!-- TRANSACTIONS -->
+  <div id="transactions-screen" class="screen fade">
     <h2>Transactions</h2>
-    <form onsubmit="addTransaction(event)">
+<form id="transaction-form">
       <input type="text" id="t-title" placeholder="Title" required>
       <input type="number" id="t-amount" placeholder="Amount" required>
-      <button type="submit">Add</button>
+      <div class="card-btn" id="add-transaction-btn">Add</div>
     </form>
     <ul id="transactions-list"></ul>
-  </section>
-<!-- Expense Tracker Section -->
-  <section id="tracker-section" class="page">
-    <h2>Expense Tracker</h2>
-    <!-- goals + progress bars -->
-  </section>
-</div>
+    <div class="small-btn" onclick="showScreen('home-screen')">⬅ Back</div>
+  </div>
 
+  <!-- BALANCE -->
+  <div id="balance-screen" class="screen fade">
+    <h2>Add Balance</h2>
+    <input type="number" id="set-balance" placeholder="Enter balance">
+    <div class="card-btn" onclick="saveBalance()">Save Balance</div>
+    <h3>Current Balance: ₹<span id="balance">0</span></h3>
+    <h3>Notes</h3>
+    <input type="text" id="note-folder" placeholder="Folder name">
+    <div class="card-btn" onclick="addFolder()">Add Folder</div>
+    <div id="folders"></div>
+    <div class="small-btn" onclick="showScreen('home-screen')">⬅ Back</div>
+  </div>
+
+<!-- EXPENSE TRACKER -->
+  <div id="tracker-screen" class="screen fade">
+    <h2>Expense Tracker</h2>
+    <div class="card">
+      <label>Daily Goal <input type="number" id="goal-daily"></label>
+      <div class="progress"><div id="bar-daily"></div></div>
+    </div>
+    <div class="card">
+      <label>Weekly Goal <input type="number" id="goal-weekly"></label>
+      <div class="progress"><div id="bar-weekly"></div></div>
+    </div>
+    <div class="card">
+      <label>Monthly Goal <input type="number" id="goal-monthly"></label>
+      <div class="progress"><div id="bar-monthly"></div></div>
+    </div>
+    <div class="card">
+      <label>Yearly Goal <input type="number" id="goal-yearly"></label>
+      <div class="progress"><div id="bar-yearly"></div></div>
+    </div>
+    <div class="small-btn" onclick="showScreen('home-screen')">⬅ Back</div>
+  </div>
 
   <script src="script.js"></script>
 </body>

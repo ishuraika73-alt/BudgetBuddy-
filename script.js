@@ -1,53 +1,43 @@
-// ===== AUTH FLOW =====
-
-// Show screen helper
+// Screen navigation
 function showScreen(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-
   if(id==="transactions-screen") loadTransactions();
   if(id==="balance-screen") loadBalance();
   if(id==="tracker-screen") updateTracker();
 }
 
 // Signup
-document.getElementById("signup-form").addEventListener("submit", function(e){
-  e.preventDefault(); // prevent reload
+document.getElementById("signup-btn").addEventListener("click", function(e){
+  e.preventDefault();
   let name=document.getElementById("signup-name").value;
   let email=document.getElementById("signup-email").value;
   let password=document.getElementById("signup-password").value;
-
-  if(!name||!email||!password){
-    alert("Fill all fields");
-    return;
-  }
-localStorage.setItem("user",JSON.stringify({name,email,password}));
+  if(!name||!email||!password){alert("Fill all fields");return;}
+  localStorage.setItem("user",JSON.stringify({name,email,password}));
   localStorage.setItem("transactions",JSON.stringify([]));
   localStorage.setItem("balance","0");
-  localStorage.setItem("folders",JSON.stringify([]));
-
+  localStorage.setItem("folders",JSON.stringify({}));
   alert("Signup successful! Please login.");
   showScreen("login-screen");
 });
-
 // Login
-document.getElementById("login-form").addEventListener("submit", function(e){
-  e.preventDefault(); // prevent reload
+document.getElementById("login-btn").addEventListener("click", function(e){
+  e.preventDefault();
   let email=document.getElementById("login-email").value;
   let password=document.getElementById("login-password").value;
   let user=JSON.parse(localStorage.getItem("user"));
-
   if(user && user.email===email && user.password===password){
     showScreen("home-screen");
   } else {
     alert("Invalid credentials");
   }
 });
-// ===== BALANCE =====
+
+// Balance
 function saveBalance(){
   let b=document.getElementById("set-balance").value;
   localStorage.setItem("balance", b);
-  alert("Balance updated!");
   loadBalance();
 }
 function loadBalance(){
@@ -56,37 +46,7 @@ function loadBalance(){
   loadFolders();
 }
 
-
-// ===== TRANSACTIONS =====
-function addTransaction(e){
-  e.preventDefault();
-  let title=document.getElementById("t-title").value;
-  let amount=parseFloat(document.getElementById("t-amount").value);
-  if(!title||!amount){alert("Fill required fields");return;}
-
-  let now=new Date();
-  let transactions=JSON.parse(localStorage.getItem("transactions"))||[];
-  transactions.push({
-    title,
-amount,
-    date:now.toLocaleDateString(),
-    time:now.toLocaleTimeString()
-  });
-  localStorage.setItem("transactions",JSON.stringify(transactions));
-  loadTransactions();
-}
-
-function loadTransactions(){
-  let transactions=JSON.parse(localStorage.getItem("transactions"))||[];
-  let list=document.getElementById("transactions-list");
-  list.innerHTML="";
-  transactions.slice().reverse().forEach(t=>{
-    let li=document.createElement("li");
-    li.textContent=`${t.date} ${t.time} | ${t.title} - ₹${t.amount}`;
-    list.appendChild(li);
-  });
-}
-// ===== NOTES / FOLDERS =====
+// ===== Folders / Notes =====
 function addFolder(){
   let folder=document.getElementById("note-folder").value;
   if(!folder){alert("Enter folder name");return;}
@@ -105,10 +65,11 @@ function loadFolders(){
     card.className="card";
     card.innerHTML=`<h4>${f}</h4>
       <input type="text" placeholder="Add item" id="item-${f}">
-      <button onclick="addItem('${f}')">Add Item</button>
+      <div class="card-btn" onclick="addItem('${f}')">Add Item</div>
       <ul id="list-${f}"></ul>`;
     div.appendChild(card);
-// render items
+
+ // render items
     let ul=document.getElementById(`list-${f}`);
     folders[f].forEach(item=>{
       let li=document.createElement("li");
@@ -128,9 +89,7 @@ function addItem(folder){
     loadFolders();
   }
 }
-
-
-// ===== EXPENSE TRACKER =====
+// ===== Expense Tracker =====
 function updateTracker(){
   let transactions=JSON.parse(localStorage.getItem("transactions"))||[];
   let now=new Date();
